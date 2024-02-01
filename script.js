@@ -37,8 +37,8 @@ const getData = async () => {
 getData();
 
 
+ymaps.ready(['Panel']).then(function () {
   
-  const init = () => {
     const map = new ymaps.Map('mapContainer', {
       center: [55.753215, 37.622504],
       zoom: 14,
@@ -47,13 +47,23 @@ getData();
 
       groupByCoordinates: false,
       clusterDisableClickZoom: false,
-      gridSize: 160,
+      gridSize: 120,
       clusterHideIconOnBalloonOpen: false,
       geoObjectHideIconOnBalloonOpen: false
+    });
+    var panel = new ymaps.Panel();
+    map.controls.add(panel, {
+        float: 'left'
     });
     geoObjects = [];
   
     let activeCategory = "Щит";
+    function getColor(item){
+      switch(item.type) {
+        case "Щит":
+          return '#3b5998'
+      }
+    }
     const showAll = () => {
       map.geoObjects.removeAll();
       clusterer.removeAll();
@@ -61,12 +71,24 @@ getData();
       i = 0;
       pointsData.forEach((item) => {
 
-            geoObjects[i++] = new ymaps.Placemark([item.lat, item.lon], {
+            let placeMark = new ymaps.Placemark([item.lat, item.lon], {
             hintContent: item.owner,
-            balloonContentBody: ['<address>', item.owner, item.address, item.number, '</address>'].join(" ")
+            
+            content: [item.owner, item.address, item.number].join(" ")
+            
+          }, {
+            iconColor: getColor(item),
           });
           
-        
+            placeMark.events.add('click', function (e) {
+              // Получим ссылку на геообъект, по которому кликнул пользователь.
+              var target = e.get('target');
+              // Зададим контент боковой панели.
+              panel.setContent(target.properties.get('content'));
+              // Переместим центр карты по координатам метки с учётом заданных отступов.
+              
+          });
+          geoObjects[i++] = placeMark
         
       });
       clusterer.add(geoObjects);
@@ -79,12 +101,23 @@ getData();
       i = 0;
       pointsData.forEach((item) => {
         if (item.type === category) {
-            geoObjects[i++] = new ymaps.Placemark([item.lat, item.lon], {
+          let placeMark = new ymaps.Placemark([item.lat, item.lon], {
+            hasBalloon: false,
             hintContent: item.owner,
-            balloonContentBody: [item.owner, item.address, item.number].join(" ")
+            iconColor: '#3b5998',
+            content: [item.owner, item.address, item.number].join(" ")
+            
           });
           
-          
+            placeMark.events.add('click', function (e) {
+              // Получим ссылку на геообъект, по которому кликнул пользователь.
+              var target = e.get('target');
+              // Зададим контент боковой панели.
+              panel.setContent(target.properties.get('content'));
+              // Переместим центр карты по координатам метки с учётом заданных отступов.
+              
+          });
+          geoObjects[i++] = placeMark
         }
       });
       clusterer.add(geoObjects);
@@ -104,6 +137,7 @@ getData();
       showAll();
     })
     showAll();
-  };
-  
-  ymaps.ready(init);
+  });
+
+
+
