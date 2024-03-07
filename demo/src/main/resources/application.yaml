@@ -1,0 +1,10 @@
+spring:
+  config:
+    import:
+      optional:secrets.yaml
+
+  jpa:
+    properties:
+      hibernate:
+        dialect:
+          org.hibernate.dialect.MySQLDialect

@@ -1,9 +1,9 @@
 const pointsData = []
 const getData = async () => {
   try {
-
-      const res = await fetch("select.php", {
+      const res = await fetch("http://localhost:8080/api/v1/ads", {
           method: "GET",
+          mode: 'cors',
           headers: {
               "Content-Type": "application/json"
           }
@@ -14,21 +14,18 @@ const getData = async () => {
           
       } else {
           for (var i in output) {
-          pointsData.push({
-            lat: output[i].lat,
-            lon: output[i].lon,
-            owner: output[i].owner,
-            type: output[i].type,
-            address: output[i].address,
-            size: output[i].size,
-            tech: output[i].tech,
-            number: output[i].number
-          })
-
-          
+            pointsData.push({
+              lat: output[i].lat,
+              lon: output[i].lon,
+              owner: output[i].owner,
+              type: output[i].type,
+              address: output[i].address,
+              size: output[i].size,
+              tech: output[i].tech,
+              number: output[i].number
+            })
           }
       }
-      tbody.innerHTML = tr;
   } catch (error) {
       console.log("error " + error)
   }
@@ -81,11 +78,8 @@ ymaps.ready(['Panel']).then(function () {
           });
           
             placeMark.events.add('click', function (e) {
-              // Получим ссылку на геообъект, по которому кликнул пользователь.
               var target = e.get('target');
-              // Зададим контент боковой панели.
               panel.setContent(target.properties.get('content'));
-              // Переместим центр карты по координатам метки с учётом заданных отступов.
               
           });
           geoObjects[i++] = placeMark
