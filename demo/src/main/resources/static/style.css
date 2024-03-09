@@ -1,8 +1,12 @@
-#mapContainer {
-	width: 100%;
-	height: 80vh;
-	background-color: #333;
+body {
+	font-family: "Raleway", sans-serif;
 }
+#mapContainer {
+	width: 99%;
+	height: 80vh;
+	display: none;
+}
+
 
 [class*="copyrights-pane"] {
 	display: none !important;
@@ -21,7 +25,16 @@
 [class*="balloon__close-button"] {
 	opacity: 1;
 }
-.category-button {
+
+.category-button{
+	
+	text-decoration: none;
+	color: black;
+
+	text-shadow: -1px 1px 2px white,
+				  1px 1px 2px white,
+				  1px -1px 0 white,
+				  -1px -1px 0 white;
 	width: 100%;
 	height: 200px;
 	text-align: center;
@@ -30,13 +43,20 @@
     margin-right: 10px;
     cursor: pointer;
 	transition: 0.3s;
-	
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-decoration: none;
+	color: black;
   }
 .category-button:hover {
-	transition: 0.3s;
-	background: rgba(0,0,0,.5);
+	text-decoration: none;
+	color: black;
+	transition: 0.5s;
+	opacity: 0.4;
+
 }
 .category-button:active {
+
 	opacity: 0.2;
 	transition: 0.1s;
 }
@@ -68,39 +88,32 @@
 	overflow: auto;
 }
 
-a, a:visited {
-	color: #04b;
-	text-decoration: none !important;
-}
-
 #billboard {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://metalkv.ru/assets/images/reklamnie_shity.jpg');
 }
 #supersite {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://leader-spb.com/wp-content/uploads/2021/02/shirokoformatnaja-pechat-dlja-supersajtov.jpg');
 }
 #busStop {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://media-lines.ru/wp-content/uploads/2017/04/OST01.jpg');
 }
 #tumba {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://best-outdoor.ru/upload/medialibrary/9c4/tumba_1.jpg');
 }
 #mediaFacade {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://plasmaonline.ru/assets/images/mediafasad.jpg');
 }
 #cityboard {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://zapadmedia.ru/wp-content/uploads/reklama-na-sitibordah.jpg');
 }
 #cityformat {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://www.reklamaregion.com/upload/images/naruzhnay_reklama/reklama-na-sitybord_1.jpg');
 }
 #superboard {
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png');
+	background-image: url('https://media.parielle.ru/img/work/catalog/a_1852_317.JPG');
 }
-.category-button:hover {
-	opacity: 0.7;
+#reset {
+	background-color:#fbf9f3;
+	height: auto;
 }
-.category-button:active {
-	opacity: 0.35;
-	transition: 0.05s;
-}
+

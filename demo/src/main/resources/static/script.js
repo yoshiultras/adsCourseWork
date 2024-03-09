@@ -1,4 +1,5 @@
 const pointsData = []
+const mapDiv = document.querySelector("map");
 const getData = async () => {
   try {
       const res = await fetch("http://localhost:8080/api/v1/ads", {
@@ -38,7 +39,7 @@ ymaps.ready(['Panel']).then(function () {
   
     const map = new ymaps.Map('mapContainer', {
       center: [55.753215, 37.622504],
-      zoom: 14,
+      zoom: 11,
       controls: ['zoomControl']
     }), clusterer = new ymaps.Clusterer({
 
@@ -62,6 +63,7 @@ ymaps.ready(['Panel']).then(function () {
       }
     }
     const showAll = () => {
+      document.getElementById("mapContainer").style.display = "flex";
       map.geoObjects.removeAll();
       clusterer.removeAll();
       geoObjects.length = 0;
@@ -71,7 +73,7 @@ ymaps.ready(['Panel']).then(function () {
             let placeMark = new ymaps.Placemark([item.lat, item.lon], {
             hintContent: item.owner,
             
-            content: [item.owner, item.address, item.number].join(" ")
+            content: ["Владелец:", item.owner, "\n", "Адрес:", item.address, "Номер:", item.number].join(" ")
             
           }, {
             iconColor: getColor(item),
@@ -89,6 +91,7 @@ ymaps.ready(['Panel']).then(function () {
       map.geoObjects.add(clusterer);
     }
     const showCategory = (category) => {
+      document.getElementById("mapContainer").style.display = "flex";
       map.geoObjects.removeAll();
       clusterer.removeAll();
       geoObjects.length = 0;
@@ -99,7 +102,7 @@ ymaps.ready(['Panel']).then(function () {
             hasBalloon: false,
             hintContent: item.owner,
             iconColor: '#3b5998',
-            content: [item.owner, item.address, item.number].join(" ")
+            content: ["Владелец:", item.owner, "Адрес:", item.address, "Номер:", item.number].join(" ")
             
           });
           
@@ -126,11 +129,10 @@ ymaps.ready(['Panel']).then(function () {
         showCategory(category);
       });
     });
-    const resetButton = document.querySelector('.reset-button');
+    const resetButton = document.getElementById('reset');
     resetButton.addEventListener('click', () => {
       showAll();
     })
-    showAll();
   });
 
 
